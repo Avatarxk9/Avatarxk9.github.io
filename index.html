@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Harris - Digital Media Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+    /* # General Styling */
+    :root {
+        --primary-color: #2c3e50; /* Dark Slate Blue */
+        --secondary-color: #7f8c8d; /* Asbestos Gray */
+        --accent-color: #00bcd4; /* Cyan - matching original IMG_7584.png */
+        --light-gray: #ecf0f1; /* Clouds White */
+        --white: #ffffff;
+        --text-color: #2c3e50;
+        --header-font: 'Lucida Grande', sans-serif;
+        --body-font: 'Montserrat', sans-serif;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--body-font);
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--white);
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 0;
+    }
+
+    /* NEW: Remove purple underline from all visited links and ensure color consistency */
+    a:visited,
+    a:link { /* Also apply to unvisited links to ensure consistent initial styling */
+        color: inherit; /* Inherit the color from its parent, preventing purple */
+        text-decoration: none; /* Remove the underline */
+    }
+
+    /* # Header and Navigation */
+    header {
+        background-color: var(--white);
+        color: var(--primary-color);
+        padding: 20px 0;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Slightly darker shadow */
+    }
+
+    header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-family: var(--header-font);
+        font-size: 1.8em;
+        color: var(--primary-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        cursor: pointer;
+    }
+
+    .logo:hover {
+        color: var(--accent-color);
+    }
+
+    nav ul {
+        list-style: none;
+    }
+
+    nav ul li {
+        display: inline-block;
+        margin-left: 30px;
+    }
+
+    nav ul li a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1em;
+        position: relative;
+        transition: color 0.3s ease;
+        cursor: pointer;
+    }
+
+    nav ul li a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        display: block;
+        margin-top: 5px;
+        right: 0;
+        background: var(--accent-color);
+        transition: width 0.4s ease;
+    }
+
+    nav ul li a:hover::after {
+        width: 100%;
+        left: 0;
+        background: var(--accent-color);
+    }
+
+    /* # Hero Section */
+    #hero {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: var(--primary-color); /* Darker background for hero */
+        color: var(--white);
+        text-align: center;
+        overflow: hidden;
+        padding-top: 80px; /* Offset for fixed header */
+    }
+
+    #hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.5; /* Slightly muted background */
+        z-index: 1;
+        mix-blend-mode: normal; /* No blend mode for pure image colors */
+    }
+
+    #hero-content {
+        position: relative;
+        z-index: 2;
+        animation: fadeIn 2s ease-out;
+    }
+
+    #hero h1 {
+        font-family: var(--header-font);
+        font-size: 4.5em; /* Slightly larger */
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    #hero p {
+        font-size: 1.6em; /* Slightly larger */
+        font-weight: 300;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+
+    /* # About Section */
+    #about {
+        background-color: var(--light-gray);
+        padding: 80px 0;
+        display: flex;
+        align-items: center;
+        min-height: 70vh;
+    }
+
+    #about .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    #about h2 {
+        font-family: var(--header-font);
+        font-size: 3.2em; /* Slightly larger */
+        margin-bottom: 30px;
+        color: var(--primary-color);
+    }
+
+    #about p {
+        font-size: 1.15em; /* Slightly larger */
+        max-width: 800px;
+        line-height: 1.8;
+        color: var(--secondary-color);
+    }
+
+    /* # Projects Section */
+    #projects {
+        background-color: var(--white);
+        padding: 80px 0;
+        min-height: 100vh;
+    }
+
+    #projects h2 {
+        font-family: var(--header-font);
+        font-size: 3.2em; /* Slightly larger */
+        text-align: center;
+        margin-bottom: 50px;
+        color: var(--primary-color);
+    }
+
+    .project-item {
+        display: flex;
+        flex-wrap: wrap; /* Allows wrapping on smaller screens */
+        /* UPDATED: Consistent margin-bottom for all project items */
+        margin-bottom: 80px; /* This creates the space *after* each project card */
+        align-items: center;
+        background-color: var(--light-gray); /* Light background for each project */
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08); /* Soft shadow for project cards */
+        padding: 30px;
+    }
+
+    .project-item:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+
+    .project-text {
+        flex: 1;
+        min-width: 300px; /* Ensure text doesn't get too narrow on smaller desktops */
+        padding: 20px;
+        animation: slideInLeft 1s ease-out;
+    }
+
+    .project-item:nth-child(even) .project-text {
+        animation: slideInRight 1s ease-out;
+    }
+
+    .project-text h3 {
+        font-family: var(--header-font);
+        font-size: 2.2em;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+    }
+
+    .project-text p {
+        font-size: 1em;
+        line-height: 1.7;
+        color: var(--secondary-color);
+        margin-bottom: 20px;
+    }
+
+    .project-images {
+        flex: 1;
+        display: flex;
+        flex-direction: column; /* Default to column, adjusted by specific project CSS */
+        gap: 15px; /* Slightly more gap */
+        padding: 20px;
+        position: relative;
+    }
+
+    .project-images img {
+        width: 100%; /* Ensure images always scale to their container */
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+    .project-images img:hover {
+        transform: translateY(-8px); /* More pronounced hover effect */
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* # Specific Project Styles */
+    /* Project 1: Vector Illustrations (Magazine Style) */
+    #project1 .project-images {
+        display: grid; /* Use grid for this specific project layout */
+        grid-template-columns: repeat(2, 1fr); /* Two columns for a magazine layout */
+        gap: 15px;
+        background-color: var(--primary-color); /* Dark background for this grid */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    #project1 .project-images img {
+        width: 100%;
+        height: 100%; /* Ensure images fill grid area */
+        object-fit: cover;
+        mix-blend-mode: normal; /* Ensure visibility */
+        box-shadow: none; /* No extra shadow here */
+    }
+
+    #project1 .project-images img:nth-child(1) { /* First image (Corium) spans both columns */
+        grid-column: 1 / 3;
+    }
+    #project1 .project-images img:nth-child(2) { /* Second image (Digital) in first column */
+        grid-column: 1 / 2;
+    }
+    #project1 .project-images img:nth-child(3) { /* Third image (#761) in second column */
+        grid-column: 2 / 3;
+    }
+
+
+    /* Project 2: Product Graphic Designs - Vertical Optimization */
+    #project2 .project-images {
+        display: flex;
+        flex-direction: column; /* Default to column */
+        gap: 25px;
+        align-items: center;
+    }
+
+    #project2 .product-display {
+        display: flex; /* Now flex for side-by-side */
+        flex-direction: row; /* Arranges children horizontally */
+        justify-content: center;
+        align-items: flex-end; /* Align bottoms if sizes differ */
+        gap: 15px; /* Gap between skateboard and griptape */
+        width: 100%;
+        max-width: 600px; /* Allow wider for side-by-side */
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        background-color: var(--white); /* White background for the product display */
+    }
+
+    #project2 .product-display img {
+        max-width: 50%; /* Each takes half width of its container */
+        height: auto;
+        object-fit: contain;
+        box-shadow: none;
+        border-radius: 0;
+        mix-blend-mode: normal;
+    }
+
+    /* # Illustration Section - UPDATED STYLES FOR CONSISTENCY */
+    /* The .project-item class will now apply the border/shadow to the content inside #Illustrations */
+    #Illustrations {
+        background-color: var(--white); /* Main section background */
+        padding: 80px 0; /* Main section padding */
+        min-height: 70vh;
+        text-align: center;
+    }
+
+    #Illustrations .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Styles for the text within the Illustration project-item */
+    #Illustrations .project-text h2 { /* Targeting h2 within project-text inside Illustrations */
+        font-family: var(--header-font);
+        font-size: 3.2em;
+        margin-bottom: 10px;
+        color: var(--primary-color);
+    }
+
+    #Illustrations .project-text p.body-text { /* Targeting p.body-text within project-text inside Illustrations */
+        font-family: var(--body-font);
+        font-size: 1.15em;
+        font-weight: 400;
+        color: var(--secondary-color);
+        max-width: 800px; /* Keep max-width for readability */
+        margin-bottom: 50px; /* Spacing below body text */
+        line-height: 1.8;
+    }
+
+    /* --- Carousel Styles - CRITICAL REVISIONS FOR IMAGE DISPLAY --- */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        background-color: var(--light-gray);
+        height: clamp(300px, 50vh, 600px); /* Responsive height: min 300px, max 600px, ideal 50% viewport height */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between; /* Push dots to bottom */
+    }
+
+    .carousel-wrapper {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        flex-grow: 1; /* Allow wrapper to take available vertical space */
+        height: 100%; /* Ensure wrapper also takes full available height */
+    }
+
+    .carousel-slide {
+        min-width: 100%; /* Each slide takes full width of wrapper */
+        flex-shrink: 0; /* Prevents shrinking */
+        flex-basis: 100%; /* CRITICAL: Ensures each slide takes exactly 100% of the parent's width */
+        display: flex;
+        justify-content: center; /* Center image horizontally */
+        align-items: center;     /* Center image vertically */
+        height: 100%; /* Ensure slide takes full height of wrapper */
+        overflow: hidden; /* Hide any overflow, though with object-fit it should be minimal */
+    }
+
+    .carousel-slide img {
+        max-width: 100%; /* Image will scale down to fit slide width */
+        max-height: 100%; /* Image will scale down to fit slide height */
+        width: auto; /* Maintain aspect ratio */
+        height: auto; /* Maintain aspect ratio */
+        display: block;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        object-fit: contain; /* CRUCIAL: Ensures image fits entirely within bounds without cropping */
+        padding: 15px; /* Add some padding around the image within the slide for visual buffer */
+        box-sizing: border-box; /* Include padding in the element's total width and height */
+    }
+
+    .carousel-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: var(--white);
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 2em;
+        z-index: 10;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .carousel-nav-btn:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .carousel-nav-btn.prev {
+        left: 10px;
+    }
+
+    .carousel-nav-btn.next {
+        right: 10px;
+    }
+
+    .carousel-dots {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        padding-bottom: 10px; /* Add padding to keep dots off bottom edge of container */
+    }
+
+    .carousel-dot {
+        width: 12px;
+        height: 12px;
+        background-color: var(--secondary-color);
+        border-radius: 50%;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .carousel-dot.active {
+        background-color: var(--accent-color);
+        transform: scale(1.2);
+    }
+
+
+    /* # Project Divider */
+    .project-divider {
+        width: 100%;
+        max-width: 150px;
+        height: 3px;
+        background-color: var(--accent-color); /* Cyan divider */
+        /* UPDATED: Consistent vertical margin. No top margin, 80px bottom margin */
+        margin: 0 auto 80px auto;
+        border-radius: 2px;
+        opacity: 0.7;
+    }
+
+    /* # Contact Section */
+    #contact {
+        background-color: var(--primary-color);
+        color: var(--white);
+        padding: 80px 0;
+        text-align: center;
+        min-height: 50vh;
+    }
+
+    #contact h2 {
+        font-family: var(--header-font);
+        font-size: 3.2em;
+        margin-bottom: 30px;
+    }
+
+    #contact p {
+        font-size: 1.1em;
+        margin-bottom: 30px;
+    }
+
+    #contact a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.2em;
+        transition: color 0.3s ease;
+    }
+
+    #contact a:hover {
+        color: var(--white);
+    }
+
+    /* Contact Form Specific Styles */
+    #contactForm {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-group {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-group label {
+        font-size: 1em;
+        margin-bottom: 8px;
+        color: var(--white);
+        font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.05);
+        color: var(--white);
+        font-family: var(--body-font);
+        font-size: 1em;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+    }
+
+    #contactForm button {
+        background-color: var(--accent-color);
+        color: var(--white);
+        padding: 15px 25px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1em;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        align-self: center;
+    }
+
+    #contactForm button:hover {
+        background-color: #008c9e; /* Darker cyan on hover */
+        transform: translateY(-2px);
+    }
+
+    .form-message {
+        margin-top: 20px;
+        font-size: 1em;
+        font-weight: 600;
+        text-align: center;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .form-message.success {
+        background-color: rgba(0, 255, 0, 0.2);
+        color: #00ff00;
+    }
+
+    .form-message.error {
+        background-color: rgba(255, 0, 0, 0.2);
+        color: #ff0000;
+    }
+
+    /* # Footer */
+    footer {
+        background-color: var(--secondary-color);
+        color: var(--light-gray);
+        text-align: center;
+        padding: 20px 0;
+        font-size: 0.9em;
+    }
+
+    /* # Lightbox Styles */
+    .lightbox-overlay {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 2000; /* Sit on top, ensuring it's above everything */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        display: flex; /* Use flex for centering */
+        justify-content: center;
+        align-items: center;
+        cursor: pointer; /* Indicate it's clickable to close */
+        animation: fadeInOverlay 0.3s ease;
+    }
+
+    .lightbox-content {
+        position: relative;
+        max-width: 90%; /* Max width of the content box */
+        max-height: 90%; /* Max height of the content box */
+        background-color: #fefefe;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+        animation: zoomInContent 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: default; /* Reset cursor for content area */
+    }
+
+    .lightbox-content img {
+        max-width: 100%;
+        max-height: 80vh; /* Adjust as needed, relative to viewport height */
+        display: block;
+        margin: 0 auto 15px auto; /* Center image and add space below */
+        border-radius: 4px;
+        object-fit: contain; /* Ensure image scales down and fits fully within its bounds */
+    }
+
+    .lightbox-caption {
+        color: var(--text-color);
+        font-size: 1.1em;
+        text-align: center;
+        padding: 0 15px; /* Add some padding for text on edges */
+    }
+
+    .close-lightbox {
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        color: #fff; /* White close button */
+        font-size: 35px;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+        z-index: 2001; /* Ensure close button is above everything */
+    }
+
+    .close-lightbox:hover,
+    .close-lightbox:focus {
+        color: var(--accent-color);
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* # Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(50px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeInOverlay {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes zoomInContent {
+        from { transform: scale(0.9); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Intersection Observer for scroll animations */
+    .animated-section {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .animated-section.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ========================================= */
+    /* # Responsive Design Adjustments */
+    /* ========================================= */
+
+    /* Small Desktops and Tablets (<= 1024px) */
+    @media (max-width: 1024px) {
+        .project-item {
+            margin-bottom: 60px; /* Adjusted for smaller screens */
+            padding: 20px;
+        }
+
+        .project-text {
+            min-width: unset;
+        }
+
+        .project-images {
+            padding: 15px;
+            gap: 10px;
+        }
+
+        /* Project 1 Grid */
+        #project1 .project-images {
+            gap: 10px;
+            padding: 15px;
+        }
+
+        /* Carousel Adjustments for Tablets */
+        .carousel-container {
+            height: clamp(250px, 45vh, 500px); /* Slightly reduce clamp max height for tablets */
+        }
+        .carousel-slide img {
+            padding: 10px; /* Reduce padding on tablets */
+        }
+        /* UPDATED: Responsive margin for divider */
+        .project-divider {
+            margin: 0 auto 60px auto; /* Adjusted for smaller screens */
+        }
+    }
+
+    /* Tablets and Larger Mobile (<= 768px) */
+    @media (max-width: 768px) {
+        header .container {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        nav ul {
+            padding-top: 10px;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+            display: block; /* Stack nav items */
+            padding: 5px 0;
+        }
+
+        #hero h1 {
+            font-size: 3em;
+        }
+
+        #hero p {
+            font-size: 1.2em;
+        }
+
+        /* --- Projects Mobile Enhancements --- */
+        .project-item {
+            flex-direction: column; /* Force stack on mobile */
+            text-align: center; /* Center text for stacked layout */
+            padding: 20px 15px;
+        }
+
+        .project-item:nth-child(even) {
+            flex-direction: column; /* Ensure reversal is also a column stack */
+        }
+
+        .project-text {
+            padding: 10px;
+            width: 100%; /* Take full width */
+            order: 1; /* Ensure text comes before images by default */
+        }
+
+        .project-item:nth-child(even) .project-text {
+            order: 1; /* Text first even if it was originally reversed */
+        }
+
+        .project-images {
+            width: 100%; /* Images container takes full width */
+            padding: 10px;
+            order: 2; /* Images second by default */
+        }
+
+        /* Project 1 Grid specific for mobile */
+        #project1 .project-images {
+            grid-template-columns: 1fr; /* Single column on mobile */
+            padding: 15px;
+            gap: 10px; /* Adjust gap for mobile */
+        }
+        #project1 .project-images img:nth-child(1),
+        #project1 .project-images img:nth-child(2),
+        #project1 .project-images img:nth-child(3) {
+            grid-column: auto; /* Reset grid column spans on mobile */
+            max-width: 100%; /* Ensure images don't overflow */
+            height: auto; /* Allow auto height for individual images */
+        }
+
+        /* Project 2 specific for mobile - Stacks again */
+        #project2 .product-display {
+            flex-direction: column; /* Stack skateboard and griptape on mobile */
+            max-width: 90%; /* Adjust max-width for better fit on smaller screens */
+            width: 100%; /* Ensure it fills parent */
+            gap: 0px; /* No gap when stacked */
+            padding: 0; /* Remove padding when stacked */
+        }
+        #project2 .product-display img {
+            max-width: 100%; /* Full width when stacked */
+            border-radius: 0;
+            padding: 0;
+        }
+
+        /* Carousel mobile adjustments */
+        .carousel-nav-btn {
+            font-size: 1.5em;
+            padding: 5px 8px;
+        }
+        .carousel-slide img {
+            padding: 5px; /* Further reduce padding on mobile */
+        }
+        .carousel-container {
+            height: clamp(200px, 40vh, 400px); /* Adjust clamp height for mobiles */
+        }
+
+        /* Contact form adjustments */
+        #contactForm {
+            padding: 15px;
+        }
+
+        /* UPDATED: Responsive margin for divider */
+        .project-divider {
+            margin: 0 auto 40px auto; /* Adjusted for mobile */
+        }
+    }
+
+    /* Smaller Mobile Devices (<= 480px) */
+    @media (max-width: 480px) {
+        nav ul li {
+            margin: 0 8px; /* Slightly less margin for very small screens */
+            font-size: 0.9em;
+        }
+
+        #hero h1 {
+            font-size: 2.2em;
+        }
+
+        #hero p {
+            font-size: 0.9em;
+        }
+
+        #about h2, #projects h2, #contact h2, #Illustrations .project-text h2 { /* Updated selector for Illustrations h2 */
+            font-size: 2em;
+        }
+        #Illustrations .project-text p.body-text { /* Updated selector for Illustrations p.body-text */
+            font-size: 1em;
+            margin-bottom: 30px;
+        }
+
+        .project-text h3 {
+            font-size: 1.6em;
+        }
+
+        /* Further tightening of image areas if necessary */
+        .project-images {
+            padding: 5px;
+        }
+
+        #project1 .project-images,
+        #project2 .project-images {
+            gap: 5px; /* Reduce gap on very small screens */
+        }
+
+        /* Lightbox for very small screens */
+        .lightbox-content {
+            padding: 10px;
+        }
+        .lightbox-content img {
+            max-height: 70vh; /* Reduce max height slightly more */
+        }
+        .lightbox-caption {
+            font-size: 1em;
+        }
+        .close-lightbox {
+            font-size: 30px;
+            right: 15px;
+            top: 5px;
+        }
+    }
+</style>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="#hero" class="logo">Michael Harris</a>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero">
+        <img id="hero-bg" src="img75840.PNG" alt="Abstract Cyan Dots Background" data-lightbox="false">
+        <div id="hero-content">
+            <h1>Michael Harris</h1>
+            <p>Graphic Design | Digital Media</p>
+        </div>
+    </section>
+
+    <section id="about" class="animated-section">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>Motivated with hands-on experience in graphic design and a strong background in teamwork and time management. Geared towards growing creatively and professionally in the digital and media arts space.</p>
+        </div>
+    </section>
+
+    <section id="projects" class="animated-section">
+        <div class="container">
+            <h2>My Work</h2>
+
+            <div class="project-item" id="project1">
+                <div class="project-text">
+                    <h3>Digital <br>Artwork | Print Design</h3>
+                    <p>Vector Illustration Software Proficiency.</p>
+                </div>
+                <div class="project-images">
+                    <img src="img76000.JPG" alt='Digital Art "Corium(2023)"' data-caption="Digital Art: Corium">
+                    <img src="img75990.JPG" alt='Print Design "Digital(2024)"' data-caption="Print Design: Digital">
+                    <img src="img871.JPG" alt="Abstract Design #761 (2023)" data-caption="Abstract Design #761">
+                </div>
+            </div>
+
+            <div class="project-divider"></div>
+
+            <div class="project-item" id="project2">
+                <div class="project-text">
+                    <h3>Product Graphic Design</h3>
+                    <p>A custom skateboard deck and grip tape design.</p>
+                </div>
+                <div class="project-images">
+                    <div class="product-display">
+                        <img src="imgboard1.JPG" alt="Skateboard Deck Design(2025)" data-caption="Custom Skateboard Deck Design">
+                        <img src="img76030.JPG" alt="Grip Tape Design (2025)" data-caption="Matching Grip Tape Design">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project divider added here between Project 2 and Illustrations -->
+    <div class="project-divider"></div>
+
+    <section id="Illustrations" class="animated-section">
+        <div class="container">
+            <!-- The entire Illustration content is now wrapped in a project-item -->
+            <div class="project-item">
+                <div class="project-text">
+                    <h2>Illustration</h2> <!-- Corrected typo in HTML -->
+                    <p class="body-text">Concept sketching and observational drawings to highlight design and visualization ability.</p>
+                </div>
+                <div class="project-images"> <!-- This div now contains the carousel -->
+                    <div class="carousel-container">
+                        <div class="carousel-wrapper">
+                            <div class="carousel-slide">
+                                <img src="img76140.jpg" alt="Observational Drawing (2025)" data-caption="Concept Sketch 1">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="img76160.jpg" alt="Observational Sketch(2024)" data-caption="Concept Sketch 2">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="img7617.JPG" alt="Concept Drawing - Urban Sketch (2024)" data-caption="Concept drawing (2024)"> <!-- Updated Alt Text -->
+                            </div>
+                        </div>
+                        <button class="carousel-nav-btn prev">&leftarrow;</button>
+                        <button class="carousel-nav-btn next">&rightarrow;</button>
+                        <div class="carousel-dots"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects-continued" class="animated-section">
+        <div class="container">
+             <div class="project-divider"></div>
+             <div class="project-item" id="project3">
+                <div class="project-text">
+                    <h3>Cartoonist | Photo Editor Experience</h3>
+                    <p>The Blue & White Flash Newspaper</p>
+                    <p><strong>Context:</strong> The Jackson State University Tigers took on the Texas Southern University Tigers and achieved an impressive 43-13 points victory.</p>
+                </div>
+                <div class="project-images">
+                    <img src="img76100.JPG" alt="Cartoonist Submission - Football Recap" data-caption="Sunday Recap University Newspaper Cartoon (2024)">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="animated-section">
+        <div class="container">
+            <h2>Get in Touch</h2>
+            <form id="contactForm" action="https://formspree.io/f/xvgrvnae" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="_replyto" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+                </div>
+
+                <div class="g-recaptcha" data-sitekey="6Ldoj3ArAAAAACaiTvg7IdSAPoIdZNvZd2RR15TN"></div>
+                <button type="submit">Send Message</button>
+                <div id="formMessage" class="form-message"></div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Michael Harris. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="lightboxOverlay" class="lightbox-overlay">
+        <span class="close-lightbox">&times;</span>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="">
+            <div id="lightboxCaption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <script>
+        // # General Scroll Animation
+        const animateOnScroll = () => {
+            const sections = document.querySelectorAll('.animated-section');
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            }, {
+                threshold: 0.2 // Trigger when 20% of the element is visible
+            });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Immediately check for elements already in view on load
+            sections.forEach(section => {
+                const tempObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            tempObserver.disconnect();
+                        }
+                    });
+                }, { threshold: 0 });
+                tempObserver.observe(section);
+            });
+        };
+
+        // # Lightbox Functionality
+        const setupLightbox = () => {
+            const lightboxOverlay = document.getElementById('lightboxOverlay');
+            const lightboxImage = document.getElementById('lightboxImage');
+            const lightboxCaption = document.getElementById('lightboxCaption');
+            const closeLightbox = document.querySelector('.close-lightbox');
+            // Select all project images *except* those with data-lightbox="false"
+            // This selects images directly under .project-images and images within .product-display, AND carousel images
+            const projectImages = document.querySelectorAll('.project-images > img:not([data-lightbox="false"]), .product-display img:not([data-lightbox="false"]), .carousel-slide img:not([data-lightbox="false"])');
+
+            projectImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    const imgSrc = this.src;
+                    const imgAlt = this.alt;
+                    const imgCaption = this.dataset.caption || imgAlt;
+
+                    lightboxImage.src = imgSrc;
+                    lightboxImage.alt = imgAlt;
+                    lightboxCaption.textContent = imgCaption; // Set lightbox caption text
+
+                    lightboxOverlay.style.display = 'flex'; // Show the lightbox
+                });
+            });
+
+            // Event listeners for closing the lightbox
+            closeLightbox.addEventListener('click', () => {
+                lightboxOverlay.style.display = 'none';
+            });
+
+            lightboxOverlay.addEventListener('click', (e) => {
+                // Close only if the click is directly on the overlay, not the content
+                if (e.target === lightboxOverlay) {
+                    lightboxOverlay.style.display = 'none';
+                }
+            });
+
+            // Add an event listener for the Escape key to close the lightbox
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightboxOverlay.style.display === 'flex') {
+                    lightboxOverlay.style.display = 'none';
+                }
+            });
+        };
+
+        // # Carousel Functionality - FULL IMPLEMENTATION with Automation
+        const setupCarousel = () => {
+            const carouselWrapper = document.querySelector('.carousel-wrapper');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevBtn = document.querySelector('.carousel-nav-btn.prev');
+            const nextBtn = document.querySelector('.carousel-nav-btn.next');
+            const dotsContainer = document.querySelector('.carousel-dots');
+
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+            let autoSlideInterval; // Variable to hold the interval ID
+
+            const slideDuration = 5000; // 5 seconds per slide for automation
+
+            const updateCarousel = () => {
+                const offset = -currentSlide * 100;
+                carouselWrapper.style.transform = `translateX(${offset}%)`;
+                updateDots();
+            };
+
+            const showSlide = (index) => {
+                // Reset interval on manual interaction
+                resetAutoSlide();
+
+                if (index >= totalSlides) {
+                    currentSlide = 0;
+                } else if (index < 0) {
+                    currentSlide = totalSlides - 1;
+                } else {
+                    currentSlide = index;
+                }
+                updateCarousel();
+            };
+
+            const nextSlide = () => {
+                showSlide(currentSlide + 1);
+            };
+
+            const prevSlide = () => {
+                showSlide(currentSlide - 1);
+            };
+
+            const createDots = () => {
+                dotsContainer.innerHTML = '';
+                for (let i = 0; i < totalSlides; i++) {
+                    const dot = document.createElement('span');
+                    dot.classList.add('carousel-dot');
+                    dot.dataset.index = i;
+                    dot.addEventListener('click', () => showSlide(i));
+                    dotsContainer.appendChild(dot);
+                }
+                updateDots();
+            };
+
+            const updateDots = () => {
+                document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                    if (index === currentSlide) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            };
+
+            // Automation functions
+            const startAutoSlide = () => {
+                // Clear any existing interval before starting a new one
+                if (autoSlideInterval) {
+                    clearInterval(autoSlideInterval);
+                }
+                autoSlideInterval = setInterval(nextSlide, slideDuration);
+            };
+
+            const resetAutoSlide = () => {
+                clearInterval(autoSlideInterval); // Stop current interval
+                startAutoSlide(); // Start a new one
+            };
+
+
+            // Event Listeners
+            prevBtn.addEventListener('click', prevSlide);
+            nextBtn.addEventListener('click', nextSlide);
+
+            // Keyboard navigation for carousel (Optional, but good for accessibility)
+            document.addEventListener('keydown', (e) => {
+                if (carouselWrapper.closest('.carousel-container') && lightboxOverlay.style.display === 'none') { // Only control if carousel is in view and lightbox is closed
+                    if (e.key === 'ArrowLeft') {
+                        prevSlide();
+                        resetAutoSlide(); // Reset auto-slide on manual keyboard interaction
+                    } else if (e.key === 'ArrowRight') {
+                        nextSlide();
+                        resetAutoSlide(); // Reset auto-slide on manual keyboard interaction
+                    }
+                }
+            });
+
+            // Initialize carousel
+            createDots();
+            updateCarousel(); // Ensure initial state is correct
+            startAutoSlide(); // Start automation on load
+        };
+
+
+        // # Document Ready
+        document.addEventListener('DOMContentLoaded', () => {
+            animateOnScroll(); // Initialize scroll animations
+            setupLightbox();   // Initialize lightbox
+            setupCarousel();   // Initialize carousel
+        });
+
+        // Add this to ensure the carousel starts correctly if images load late
+        window.addEventListener('load', () => {
+            // No specific actions needed here if setupCarousel is called on DOMContentLoaded
+            // But good to keep if any initial image loading issues are observed.
+        });
+    </script>
+</body>
+</html>
